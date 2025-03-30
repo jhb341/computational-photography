@@ -19,3 +19,15 @@ def show_image(img, title):
         plt.yticks([0, height-1])
         plt.title(title)
         plt.show()
+
+def gaussian_lpf(shape, co):
+    P, Q = shape
+    u = np.arange(P)
+    v = np.arange(Q)
+    U, V = np.meshgrid(u, v, indexing='ij')
+    
+    u_c, v_c = P//2, Q//2
+    d_square = (U - u_c)**2 + (V - v_c)**2
+    
+    g_lpf = np.exp(-d_square / (2 * (co**2)))
+    return g_lpf
